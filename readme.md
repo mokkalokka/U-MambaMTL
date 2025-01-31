@@ -113,6 +113,20 @@ class="center">
 class="center">
 </p>
 
+## Citation
+
+```
+@inproceedings{
+larsen2025prostate,
+title={Prostate Cancer Detection in Bi-Parametric {MRI} using Zonal Anatomy-Guided U-Mamba with Multi-Task Learning},
+author={Michael S. Larsen and Syed Farhan Abbas and Gabriel Kiss and Mattijs Elschot and Tone F. Bathen and Frank Lindseth},
+booktitle={Submitted to Medical Imaging with Deep Learning},
+year={2025},
+url={https://openreview.net/forum?id=ZkmVQinyAE},
+note={under review}
+}
+```
+
 
 ## Acknowledgements
 
