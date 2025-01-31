@@ -88,7 +88,7 @@ chmod +x export.sh
 
 
 A spesific model can be compressed using the following command (within the ``gc_algorithms/base_container/models`` folder):
-Each of these models does rely on a U-Mamba prostate segmentation model for prostate center cropping. The weights for this model is available inside the following folder: ``gc_algorithms/base_container/models/umamba_mtl/weights/prostate_weights.ckpt`` if you want to use swin_unetr or umamba please copy this weight into the respective folder.
+Each of these models does rely on a U-Mamba prostate segmentation model for prostate center cropping.
 
 ```
 tar -czvf swin_unetr.tar.gz -C swin_unetr .
