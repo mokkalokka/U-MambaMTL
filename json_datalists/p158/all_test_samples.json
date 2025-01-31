@@ -1,0 +1,232 @@
+{
+    "test": [
+        {
+            "image": [
+                "prostate158/test/016/t2.nii.gz",
+                "prostate158/test/016/adc.nii.gz",
+                "prostate158/test/016/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/016/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/016/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/016_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/016_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/013/t2.nii.gz",
+                "prostate158/test/013/adc.nii.gz",
+                "prostate158/test/013/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/013/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/013/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/013_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/013_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/010/t2.nii.gz",
+                "prostate158/test/010/adc.nii.gz",
+                "prostate158/test/010/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/010/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/010/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/010_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/010_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/005/t2.nii.gz",
+                "prostate158/test/005/adc.nii.gz",
+                "prostate158/test/005/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/005/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/005/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/005_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/005_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/007/t2.nii.gz",
+                "prostate158/test/007/adc.nii.gz",
+                "prostate158/test/007/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/007/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/007/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/007_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/007_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/019/t2.nii.gz",
+                "prostate158/test/019/adc.nii.gz",
+                "prostate158/test/019/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/019/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/019/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/019_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/019_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/012/t2.nii.gz",
+                "prostate158/test/012/adc.nii.gz",
+                "prostate158/test/012/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/012/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/012/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/012_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/012_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/017/t2.nii.gz",
+                "prostate158/test/017/adc.nii.gz",
+                "prostate158/test/017/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/017/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/017/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/017_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/017_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/001/t2.nii.gz",
+                "prostate158/test/001/adc.nii.gz",
+                "prostate158/test/001/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/001/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/001/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/001_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/001_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/011/t2.nii.gz",
+                "prostate158/test/011/adc.nii.gz",
+                "prostate158/test/011/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/011/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/011/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/011_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/011_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/003/t2.nii.gz",
+                "prostate158/test/003/adc.nii.gz",
+                "prostate158/test/003/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/003/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/003/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/003_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/003_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/009/t2.nii.gz",
+                "prostate158/test/009/adc.nii.gz",
+                "prostate158/test/009/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/009/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/009/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/009_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/009_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/002/t2.nii.gz",
+                "prostate158/test/002/adc.nii.gz",
+                "prostate158/test/002/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/002/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/002/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/002_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/002_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/015/t2.nii.gz",
+                "prostate158/test/015/adc.nii.gz",
+                "prostate158/test/015/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/015/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/015/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/015_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/015_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/014/t2.nii.gz",
+                "prostate158/test/014/adc.nii.gz",
+                "prostate158/test/014/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/014/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/014/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/014_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/014_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/004/t2.nii.gz",
+                "prostate158/test/004/adc.nii.gz",
+                "prostate158/test/004/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/004/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/004/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/004_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/004_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/018/t2.nii.gz",
+                "prostate158/test/018/adc.nii.gz",
+                "prostate158/test/018/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/018/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/018/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/018_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/018_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/006/t2.nii.gz",
+                "prostate158/test/006/adc.nii.gz",
+                "prostate158/test/006/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/006/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/006/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/006_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/006_prob.nii.gz"
+        },
+        {
+            "image": [
+                "prostate158/test/008/t2.nii.gz",
+                "prostate158/test/008/adc.nii.gz",
+                "prostate158/test/008/dwi.nii.gz"
+            ],
+            "zones": "prostate158/test/008/t2_anatomy_reader1.nii.gz",
+            "pca": "prostate158/test/008/adc_tumor_reader1.nii.gz",
+            "case_pca": 1,
+            "prostate_pred": "prostate158/UmambaBot_prostate/preds/008_pred.nii.gz",
+            "prostate_prob_map": "prostate158/UmambaBot_prostate/prob/008_prob.nii.gz"
+        }
+    ]
+}

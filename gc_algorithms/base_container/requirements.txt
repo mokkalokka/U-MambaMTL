@@ -1,0 +1,8 @@
+tqdm
+pandas
+numpy
+evalutils==0.3.0
+monai[all]==1.3.2
+picai-eval==1.4.5
+causal-conv1d==1.2.0.post2
+mamba-ssm==1.2.0.post1
