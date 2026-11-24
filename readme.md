@@ -12,26 +12,34 @@ Prostate cancer (PCa) remains a leading cause of cancer-related morbidity, empha
 
 
 ## How to install:
+
+This repository uses [uv](https://docs.astral.sh/uv/) as its package manager. The PyTorch, `mamba-ssm`, and `causal-conv1d` CUDA wheels are resolved automatically by uv (Linux x86_64 only).
+
 ```
-conda env create --file=environment.yml
-conda activate umamba_mtl
+# Install uv (if you do not have it already):
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create the virtual environment and install all dependencies from the lockfile:
+uv sync
+
 wandb login # Logging into weights and biases (required for logging during model training)
 ```
 
-This will install all packages needed to run the experiments, including the shared modules in /shared_modules.
+Run scripts inside the environment using `uv run`, e.g. ``uv run python trainer.py``, or activate the environment manually with ``source .venv/bin/activate``.
+
+This will install all packages needed to run the experiments, including the shared modules in /umamba_mtl.
 A shared module can be loaded like this:
 
 ```
-from shared_modules.networks.UMambaBot_3d_mtl.py
+from umamba_mtl.networks.UMambaBot_3d_mtl import UMambaBotMTL
 ```
 
 ## Download weights (optional):
 
-You may choose which weights to download by changing the variables inside ``utils/download_weights.py`` (defaults to umamba_mtl only).
+You may choose which weights to download by changing the variables inside ``utils/download_weights.py`` (defaults to umamba_mtl_single only). All models are downloaded into ``weights/[model_name]/``.
 
 ```
-cd utils
-python download_weights.py
+uv run python utils/download_weights.py
 ```
 
 
@@ -48,6 +56,13 @@ The repository expects the datasets to be located in ``data/``. The datasets (ex
 You can either make your own json datalists or use the existing lists in ``json_datalists/{dataset_id}/``.
 Instructions for PI-CAI training set download and preprossessing can be seen in ``data/PI-CAI-V2.0/readme.md``.
 
+
+## Inference on new data
+
+A ready-to-run example of running the pretrained ``umamba_mtl_single`` model (5-fold ensemble) on a single biparametric MRI case is provided in ``inference/umamba_mtl_single_inference.ipynb``.
+It showcases inference on a bundled PI-CAI sample case (in ``inference/sample_data/``), reads raw ``.mha`` or ``.nii.gz`` files (ADC/HBV are resampled onto the T2w grid by the pipeline), uses a center crop (no prostate segmentation input), saves the PCa probability map and zonal segmentation as separate files, and visualizes the results.
+The notebook is kept minimal by two helpers: ``inference/build_umamba_mtl_single.py`` builds the model from a checkpoint (containing only the inference-relevant parts of the experiment's trainer and config, with the required values as defaults), and ``inference/inference_transforms.py`` provides the pre- and post-processing transforms.
+Replace the paths in ``image_files`` with your own T2w/ADC/HBV volumes to run it on new data.
 
 ## Local training and testing
 
@@ -101,30 +116,30 @@ These models can then be uploaded into the algorithm on the grand challenge webs
 
 ## Architecture overview:
 
-### Umamba
 <p align="center">
-<img src="figures/u-mamba.png" width=80% height=80%
+<img src="figures/architecture.png" width=80% height=80%
 class="center">
 </p>
 
-### Umamba MTL
-<p align="center">
-<img src="figures/u-mamba_mtl.png" width=80% height=80%
-class="center">
-</p>
 
 ## Citation
 
 ```
-@inproceedings{
-larsen2025prostate,
-title={Prostate Cancer Detection in Bi-Parametric {MRI} using Zonal Anatomy-Guided U-Mamba with Multi-Task Learning},
-author={Michael S. Larsen and Syed Farhan Abbas and Gabriel Kiss and Mattijs Elschot and Tone F. Bathen and Frank Lindseth},
-booktitle={Submitted to Medical Imaging with Deep Learning},
-year={2025},
-url={https://openreview.net/forum?id=ZkmVQinyAE},
-note={under review}
+@InProceedings{pmlr-v301-larsen26a,
+  title = 	 {Prostate Cancer Detection in Bi-Parametric MRI using Zonal Anatomy-Guided U-Mamba with Multi-Task Learning},
+  author =       {Larsen, Michael S. and Abbas, Syed Farhan and Kiss, Gabriel and Elschot, Mattijs and Bathen, Tone F. and Lindseth, Frank},
+  booktitle = 	 {Proceedings of The 8th International Conference on Medical Imaging with Deep Learning},
+  pages = 	 {864--881},
+  year = 	 {2026},
+  editor = 	 {Tasdizen, Tolga and Elhabian, Shireen and Summers, Ronald and Chen, Chen and Koch, Lisa and Zhuang, Yan},
+  volume = 	 {301},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {09--11 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://raw.githubusercontent.com/mlresearch/v301/main/assets/larsen26a/larsen26a.pdf},
+  url = 	 {https://proceedings.mlr.press/v301/larsen26a.html},
 }
+
 ```
 
 

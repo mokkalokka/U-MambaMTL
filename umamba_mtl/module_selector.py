@@ -1,7 +1,7 @@
 from monai.networks.nets import SwinUNETR
 from monai.losses import FocalLoss, DiceFocalLoss, TverskyLoss, DeepSupervisionLoss
-from shared_modules.networks.UMambaBot_3d import UMambaBot
-from shared_modules.networks.UMambaBot_3d_mtl import UMambaBotMTL
+from umamba_mtl.networks.UMambaBot_3d import UMambaBot
+from umamba_mtl.networks.UMambaBot_3d_mtl import UMambaBotMTL
 import wandb
 from lightning.pytorch.loggers import WandbLogger
 import torch

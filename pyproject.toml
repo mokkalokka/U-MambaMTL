@@ -1,0 +1,78 @@
+[project]
+name = "umamba-mtl"
+version = "0.2.0"
+description = "U-Mamba MTL: multi-task U-Mamba for prostate MRI"
+readme = "readme.md"
+license = "Apache-2.0"
+authors = [
+    { name = "Michael Staff Larsen", email = "michael.s.larsen@ntnu.no" },
+    { name = "Syed Farhan Abbas" },
+]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    # torch, mamba-ssm, and causal-conv1d must be installed as a matched set of
+    # prebuilt CUDA wheels (see [tool.uv.sources] below). The mamba-ssm and
+    # causal-conv1d wheels are built against one specific torch minor version,
+    # so these three pins must be bumped together.
+    "torch==2.9.1",
+    "mamba-ssm==2.3.2.post1+cu.12.8.torch.2.9",
+    "causal-conv1d==1.7.0+cu.12.8.torch.2.9",
+    # training
+    "lightning",                      # provides both `lightning.pytorch` and `pytorch_lightning`
+    "torchmetrics",
+    "monai",
+    "nnunetv2",                       # used by the U-Mamba networks (a copy is also vendored in gc_algorithms for the PI-CAI docker container)
+    "dynamic-network-architectures",  # building blocks for the U-Mamba networks
+    "einops",
+    # PI-CAI
+    "picai-eval",
+    "picai-prep",
+    "picai-baseline",                 # dataset splits used by the data preparation scripts
+    "report-guided-annotation",       # lesion candidate extraction used by torch_metrics.PicaiMetric
+    # data / imaging
+    "numpy",
+    "scipy",
+    "pandas",
+    "scikit-learn",
+    "SimpleITK",
+    "itk",                    # MONAI ITKReader, used to load .mha files (data_module_all pipeline)
+    # plotting, logging, utilities
+    "matplotlib",
+    "seaborn",
+    "pillow",
+    "pyyaml",
+    "wandb",
+    "munch",
+    "tqdm",
+    "ipywidgets",
+    "gdown",
+]
+
+[dependency-groups]
+dev = ["ipykernel"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["umamba_mtl*"]
+
+[tool.uv]
+# The CUDA wheels only exist for Linux x86_64, so only resolve for that platform.
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "astral-cu128"
+url = "https://wheels.astral.sh/simple/cu128/"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+mamba-ssm = { index = "astral-cu128" }
+causal-conv1d = { index = "astral-cu128" }

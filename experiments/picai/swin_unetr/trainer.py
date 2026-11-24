@@ -8,12 +8,12 @@ from monai.transforms import (
     AsDiscrete,
 )
 import warnings
-from shared_modules.data_module import DataModule
-from shared_modules.module_selector import get_network, get_logger, get_callbacks, get_loss_fn
-from shared_modules.utils import load_config
-from shared_modules.plotting import plot_confusion, plot_difference, plot_metrics
+from umamba_mtl.data_module import DataModule
+from umamba_mtl.module_selector import get_network, get_logger, get_callbacks, get_loss_fn
+from umamba_mtl.utils import load_config
+from umamba_mtl.plotting import plot_confusion, plot_difference, plot_metrics
 from monai.optimizers.lr_scheduler import WarmupCosineSchedule
-from shared_modules.torch_metrics import PicaiMetric
+from umamba_mtl.torch_metrics import PicaiMetric
 
 
 torch.set_float32_matmul_precision("high")

@@ -1,22 +1,30 @@
+import argparse
 import torch
 import pytorch_lightning as pl
 from pytorch_lightning import Trainer
 from functools import partial
 from monai.metrics import DiceMetric
 from monai.inferers import sliding_window_inference
+from monai.transforms import (
+    AsDiscrete,
+)
 from monai.losses import DiceCELoss
 import warnings
-from shared_modules.data_module import DataModule
-from shared_modules.module_selector import get_network, get_logger, get_callbacks, get_loss_fn
-from shared_modules.utils import load_config
-from shared_modules.plotting import plot_confusion, plot_difference, plot_metrics
+from umamba_mtl.data_module import DataModule
+from umamba_mtl.module_selector import get_network, get_logger, get_callbacks, get_loss_fn
+from umamba_mtl.utils import load_config
+from umamba_mtl.plotting import plot_confusion, plot_difference, plot_metrics
 from monai.optimizers.lr_scheduler import WarmupCosineSchedule
-from shared_modules.torch_metrics import PicaiMetric
+from umamba_mtl.torch_metrics import PicaiMetric
 
 
 torch.set_float32_matmul_precision("high")
 warnings.filterwarnings("ignore", category=UserWarning)
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--fold", type=int, required=True, help="Fold number for cross-validation")
+    return parser.parse_args()
 
 
 class LitModel(pl.LightningModule):
@@ -54,6 +62,7 @@ class LitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         img, pca, zones = batch["image"], batch["pca"], batch["zones"]
         prostate = torch.logical_or(zones[:,1:2,...], zones[:,2:3,...]).float()
+        
 
         logits = self.inferer(img) 
     
@@ -126,7 +135,16 @@ class LitModel(pl.LightningModule):
 
 
 if __name__ == "__main__":
+    args = parse_args()
     config = load_config()
+    
+    # Update config with fold number
+    config.logger.experiment_name = f"{config.logger.experiment_name}_f{args.fold}"
+    config.data.json_list = f"{config.data.json_list}fold_{args.fold}.json"
+    
+    print(f"Training fold: {args.fold}")
+    print(f"Experiment name: {config.logger.experiment_name}")
+    print(f"Json datalist: {config.data.json_list}")
 
     data_module = DataModule(
         config,

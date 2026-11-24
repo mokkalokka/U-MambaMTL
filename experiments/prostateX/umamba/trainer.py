@@ -9,9 +9,9 @@ from monai.transforms import (
 )
 from monai.losses import DiceCELoss
 import warnings
-from shared_modules.data_module import DataModule
-from shared_modules.module_selector import get_network, get_logger, get_callbacks
-from shared_modules.utils import load_config
+from umamba_mtl.data_module import DataModule
+from umamba_mtl.module_selector import get_network, get_logger, get_callbacks
+from umamba_mtl.utils import load_config
 from monai.optimizers.lr_scheduler import WarmupCosineSchedule
 
 

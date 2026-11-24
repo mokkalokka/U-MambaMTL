@@ -17,7 +17,7 @@ from dynamic_network_architectures.initialization.weight_init import init_last_b
 from nnunetv2.utilities.network_initialization import InitWeights_He
 from mamba_ssm import Mamba
 from dynamic_network_architectures.building_blocks.helper import maybe_convert_scalar_to_list, get_matching_pool_op
-from torch.cuda.amp import autocast
+from torch.amp import autocast
 from dynamic_network_architectures.building_blocks.residual import BasicBlockD
 from einops import rearrange
 
@@ -52,10 +52,10 @@ class MambaLayer(nn.Module):
                 expand=expand,    # Block expansion factor
         )
     
-    @autocast(enabled=False)
+    @autocast("cuda", enabled=False)
     def forward(self, x):
         if x.dtype == torch.float16:
-            x = x.type(torch.float32) 
+            x = x.type(torch.float32)
         B, C = x.shape[:2]
         assert C == self.dim
         n_tokens = x.shape[2:].numel()
@@ -340,10 +340,7 @@ class UNetResDecoder(nn.Module):
         seg_outputs = []
         for s in range(len(self.stages)):
             x = self.upsample_layers[s](lres_input)
-            # print("shape_2:", x.shape)
-            # print("skips_shape:", skips[-(s+2)].shape)
             x = torch.cat((x, skips[-(s+2)]), 1)
-            # print("shape_3:", x.shape)
             x = self.stages[s](x)
             if self.deep_supervision:
                 seg_outputs.append(self.seg_layers[s](x))
@@ -375,7 +372,7 @@ class UNetResDecoder(nn.Module):
                 output += np.prod([self.num_classes, *skip_sizes[-(s+1)]], dtype=np.int64)
         return output
     
-class UMambaBotMTL(nn.Module):
+class UMambaBot(nn.Module):
     def __init__(self,
                  input_channels: int,
                  n_stages: int,
@@ -433,37 +430,18 @@ class UMambaBotMTL(nn.Module):
             return_skips=True,
             stem_channels=stem_channels
         )
-        
-        self.deep_supervision = deep_supervision
+
         self.mamba_layer = MambaLayer(dim = features_per_stage[-1])
-        
-        # self.decoders = [UNetResDecoder(self.encoder, 1, n_conv_per_stage_decoder, deep_supervision) for _ in range(num_classes)]
-        
-        self.decoder_0 = UNetResDecoder(self.encoder, 2, n_conv_per_stage_decoder, deep_supervision)
-        self.decoder_1 = UNetResDecoder(self.encoder, 3, n_conv_per_stage_decoder, deep_supervision)
-        # self.decoder_2 = UNetResDecoder(self.encoder, 1, n_conv_per_stage_decoder, deep_supervision)
-        
-        # self.decoders = [self.decoder_0, self.decoder_1, self.decoder_2]
-        self.decoders = [self.decoder_0, self.decoder_1]
-        # self.decoder = UNetResDecoder(self.encoder, num_classes, n_conv_per_stage_decoder, deep_supervision)
+
+        self.decoder = UNetResDecoder(self.encoder, num_classes, n_conv_per_stage_decoder, deep_supervision)
 
     def forward(self, x):
         x = rearrange(x, "b c h w d -> b c d h w")
         skips = self.encoder(x)
         skips[-1] = self.mamba_layer(skips[-1])
-        
-        outs = [decoder(skips) for decoder in self.decoders]
-    
-        if self.deep_supervision and self.training:
-            outs[0] = [rearrange(out, "b c d h w -> b c h w d") for out in outs[0]]
-            outs[1] = [rearrange(out, "b c d h w -> b c h w d") for out in outs[1]]
-            return outs 
-        elif self.deep_supervision and not self.training:
-            outs = torch.concat([rearrange(out[0], "b c d h w -> b c h w d") for out in outs], dim=1)
-        else:
-            outs = torch.concat([rearrange(out, "b c d h w -> b c h w d") for out in outs], dim=1)
-        return outs
-        # return torch.concat([rearrange(decoder(skips), "b c d h w -> b c h w d") for decoder in self.decoders], dim=1)
+        out = self.decoder(skips)
+        out = rearrange(out, "b c d h w -> b c h w d") 
+        return out
 
     def compute_conv_feature_map_size(self, input_size):
         assert len(input_size) == convert_conv_op_to_dim(self.encoder.conv_op), "just give the image size without color/feature channels or " \

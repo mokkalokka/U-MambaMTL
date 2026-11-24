@@ -181,8 +181,25 @@ def volume_slice_plotter(volume1, volume2):
         plt.show()
 
 
-def slice_comparison(image, labels, titles):
-    blended_imgs = [blend_images(image=image, label=label, cmap="coolwarm") for label in labels]
+def slice_comparison(image, labels, titles, alpha_threshold=0.2):
+    """Overlay each label on the image with an interactive slice slider.
+
+    Args:
+        image: the background image, (1, X, Y, Z) or (3, X, Y, Z).
+        labels: list of overlay volumes, each (1, X, Y, Z).
+        titles: title of each overlay column.
+        alpha_threshold: label values below this threshold are rendered fully
+            transparent, so only sufficiently high values cover the image.
+
+    Each slice is rotated 90 degrees clockwise for display (the image's first
+    spatial axis is shown horizontally).
+    """
+    # Per-voxel opacity: fully transparent below the threshold, semi-opaque above it.
+    alphas = [(label >= alpha_threshold) * 0.5 for label in labels]
+    blended_imgs = [
+        blend_images(image=image, label=label, cmap="coolwarm", alpha=alpha)
+        for label, alpha in zip(labels, alphas)
+    ]
 
     # Visualization function
     @interact(slice_index=IntSlider(min=0, max=labels[0].shape[-1]-1, description='Slice Index:'))
@@ -192,7 +209,8 @@ def slice_comparison(image, labels, titles):
 
         for i, (blended_img, title) in enumerate(zip(blended_imgs, titles)):
             ax = fig.add_subplot(gs[0, i])
-            img_plot = ax.imshow(torch.moveaxis(blended_img[:, :, :, slice_index], 0, -1), cmap="coolwarm")
+            slice_img = torch.moveaxis(blended_img[:, :, :, slice_index], 0, -1)
+            img_plot = ax.imshow(torch.rot90(slice_img, k=-1, dims=(0, 1)), cmap="coolwarm")
             ax.set_title(title, fontsize=20)
             ax.axis('off')
 
