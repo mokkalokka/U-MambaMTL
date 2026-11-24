@@ -1,7 +1,7 @@
 # Zonal Anatomy-Guided Prostate Cancer Detection in Bi-Parametric MRI using U-Mamba with Multi-Task Learning
-This is the official code for U-Mamba MTL (Submitted to MIDL 2025)
+This is the official code for U-Mamba MTL
 
-Link to the preprint: https://openreview.net/forum?id=ZkmVQinyAE
+Link to the paper: https://proceedings.mlr.press/v301/larsen26a.html (MIDL 2025)
 
 
 Abstract:
